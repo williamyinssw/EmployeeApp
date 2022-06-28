@@ -18,6 +18,17 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalReactPolicy",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000",
+                                "http://localhost")
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+        });
+});
 
 var app = builder.Build();
 
@@ -28,6 +39,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors();
 app.UseLoggingMiddleware();
 
 app.UseHttpsRedirection();

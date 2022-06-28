@@ -9,11 +9,13 @@ using EmployeeApp.API.Data;
 using EmployeeApp.API.Model;
 using EmployeeApp.API.Interfaces;
 using System.Net;
+using Microsoft.AspNetCore.Cors;
 
 namespace EmployeeApp.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowLocalReactPolicy")]
     public class EmployeesController : ControllerBase
     {
         private readonly IEmployeeRepository _employeeRepository;
